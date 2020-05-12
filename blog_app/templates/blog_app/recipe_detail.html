@@ -1,0 +1,53 @@
+{% extends 'blog_app/base.html' %}
+{% block content %}
+
+    <div class="container recipe_row">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <p class="recipeimage "><img src="{{ recipe.image.url }}" alt="Image"></p>
+        </div>
+         <div class="col-sm-2"></div>
+    </div>
+    </div>
+    <h1 class="recipetitle myfont">{{ recipe.title }} </h1>
+
+    <div class="container buttons">
+    {% if recipe.published_date %}
+        <div class="date recipedate">
+            {{ recipe.publishdate }}
+        </div>
+    {% else %}
+        <a class="btn my-button" href="{% url 'recipe_publish' pk=recipe.pk %}">Publish</a>
+    {% endif %}
+     {% if user.is_authenticated %}
+
+        <a class="btn my-button" href="{% url 'recipe_edit' pk=recipe.pk %}">
+            <span class="glyphicon glyphicon-pencil">edit</span>
+        </a>
+        <a class="btn my-button" href="{% url 'recipe_delete' pk=recipe.pk %}">
+            <span class="glyphicon glyphicon-remove">delete</span>
+        </a>
+
+    {% endif %}
+    </div>
+    <div class="container ">
+        <div class="row">
+            <div class="col-xs-5 col-sm-3 recipe-box myfont">
+                <p class="recipeingredients">
+                    {{ recipe.ingredients|safe|linebreaks }}
+                </p>
+            </div>
+            <div class="col-xs-7 col-sm-8 recipe-box myfont">
+                <p class="recipecontent">{{ recipe.text|safe|linebreaksbr }}
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'blog_app/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <h1>New Recipe</h1>
+    <form class="recipe-form" enctype="multipart/form-data" method="POST">
+
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn my-button">Save</button>
+    </form>
+    {% include 'thumbnail_editor.html' %}
+
+{% endblock %}

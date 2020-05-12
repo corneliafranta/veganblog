@@ -1,0 +1,18 @@
+{% extends 'blog_app/base.html' %}
+{% load staticfiles %}
++
+{% block content %}
+    <div class="about-me">
+    <div class="container about-me">
+    <h1>CONTACT ME</h1>
+    </div>
+
+
+ <form role="form" action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'blog_app/base.html' %}
+{% block content %}
+        <div class="container">
+        <div class="row">
+
+        {% for recipe in recipe_list %}
+
+        <div class="recipe col-sm-4">
+           <div class="card my-card" style="background-color: gainsboro; margin-bottom: 1em">
+               <a href="{% url 'recipe_detail' pk=recipe.pk %}"><img src="{{ recipe.thumbnail_image }}" class="card-img-top my-card-img" style="height: 15em" alt="..."></a>
+
+            <div class="card-body">
+            <h5 class="card-title" style="font-family: 'Roboto Condensed', sans-serif">{{recipe.title}}</h5>
+            <p class="card-text" style="font-family: 'Roboto Condensed', sans-serif">{{recipe.description|safe}}</p>
+            </div>
+            <div class="card-footer">
+            <small class="text-muted">{{ recipe.publishedate }}</small>
+            <a href="{% url 'recipe_detail' pk=recipe.pk %}" style="color: darkslategray">Open</a>
+            </div>
+        </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}

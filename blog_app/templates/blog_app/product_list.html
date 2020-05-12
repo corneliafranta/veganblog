@@ -1,0 +1,31 @@
+{% extends 'blog_app/base.html' %}
+{% block content %}
+
+    <div class="centerstage">
+        {% for product in product_list %}
+            <div class="recipe col-sm-4">
+           <div class="card my-card" style="background-color: gainsboro">
+               <a href="{% url 'product_detail' pk=product.pk %}"><img src="{{ product.thumbnail_image }}" class="card-img-top my-card-img" style="height: 15em" alt="..."></a>
+
+            <div class="card-body">
+            <h5 class="card-title" style="font-family: 'Roboto Condensed', sans-serif">{{product.title}}</h5>
+            <p class="card-text" style="font-family: 'Roboto Condensed', sans-serif">
+                <p>{{ product.get_category_display }}</p>
+                <p>{{ product.company }}</p>
+            </p>
+            </div>
+            <div class="card-footer">
+
+            <small class="text-muted">{{ product.publishedate }}</small>
+            <a href="{% url 'product_detail' pk=product.pk %}" style="color: darkslategray">Open</a>
+            </div>
+        </div>
+        </div>
+
+
+
+        {% endfor %}
+
+
+        </div>
+{% endblock %}

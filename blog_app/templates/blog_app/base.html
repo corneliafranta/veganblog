@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>myVeganBlog</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="{% static 'js/jquery-3.5.0.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <!-- Medium Style Editor -->
+    <script src="{% static 'js/medium-editor.js' %}"></script>
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css"
+          type="text/css" media="screen" charset="utf-8">
+     <script src="{% static 'js/jquery-cropper.min.js' %}"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Roboto+Condensed&display=swap"
+          rel="stylesheet">
+    <!-- Font Awsome -->
+    <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
+    <link href="/your-path-to-fontawesome/css/brands.css" rel="stylesheet">
+    <link href="/your-path-to-fontawesome/css/solid.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="titleblock sticky-top">
+
+    <h1> &#128602; plantbased - family - food &#128600;</h1>
+</div>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg sticky-top ">
+    <a class="navbar-brand  nav-text" href="{% url 'post_list' %}">WELCOME</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item ">
+                <a class="nav-link nav-text" href="{% url 'about' %}">ABOUT ME <span
+                        class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-text" href="{% url 'recipe_list' %}">RECIPES</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link nav-text dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    INFORMATION
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item nav-text" href="{% url 'product_list' %}">VEGAN PRODUCTS</a>
+                    <a class="dropdown-item nav-text" href="{% url 'documentaries' %}">DOCUMENTARIES</a>
+                </div>
+            </li>
+
+        </ul>
+        <ul class="nav navbar-nav nav-right">
+            {% if user.is_authenticated %}
+
+
+                <a class="nav-text nav-welcome" >WELCOME: {{ user.username }} </a>
+
+                <li class="nav-item dropdown nav-text">
+                    <a class="nav-link nav-text dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        EDIT
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item nav-text" href="{% url 'post_new' %}">NEW POST</a>
+                        <a class="dropdown-item nav-text" href="{% url 'post_draft_list' %}">DRAFTS</a>
+                        <a class="dropdown-item nav-text" href="{% url 'recipe_new' %}">NEW RECIPE</a>
+                        <a class="dropdown-item nav-text" href="{% url 'recipe_draft_list' %}">RECIPE DRAFTS</a>
+                        <a class="dropdown-item nav-text" href="{% url 'product_new' %}">NEW PRODUCT</a>
+                        <a class="dropdown-item nav-text" href="{% url 'product_draft_list' %}">PRODUCT DRAFTS</a>
+                        <a class="dropdown-item nav-text" href="{% url 'logout' %}">LOGOUT</a>
+                    </div>
+
+                    {% else %}
+                <li><a class='nav navbar-right nav-text' href="{% url 'login' %}"><i class="fas fa-user">Login</i></a></li>
+
+            {% endif %}
+
+        </ul>
+    </div>
+</nav>
+<!-- Content Block -->
+<div class="content container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="'blog_post">
+                {% block content %}
+
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<!-- Footer -->
+<footer class="page-footer fixed-bottom ">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">
+    <a  class="footer-item" href="{% url 'impressum' %}">Impressum</a>
+    <a  class="footer-item" href="{% url 'contact' %} ">Contact Me</a>
+    <a  class="footer-item" href="{% url 'faq' %}">FAQ</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+
+
+</body>
+
+{% if user.is_authenticated %}
+<script>
+    var editor  = new MediumEditor('.editable', {
+        toolbar: {
+            buttons: ["bold", "italic", "underline", "strikethrough", "subscript", "superscript", "anchor", "quote", "h1", "h2", "h3", "h4", "h5", "h6", "removeFormat", "orderedlist", "unorderedlist", "justifyLeft", "justifyCenter", "justifyRight", "justifyFull" ],
+        static: true,
+            diffTop: 10
+        }
+    });
+</script>
+{% endif %}
+</html>

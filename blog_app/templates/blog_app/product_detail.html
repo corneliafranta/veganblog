@@ -1,0 +1,47 @@
+{% extends 'blog_app/base.html' %}
+{% block content %}
+
+     <h1 class="producttitle myfont">{{ product.title }} </h1>
+    {% if product.published_date %}
+        <div class="date recipedate">
+        </div>
+    {% else %}
+        <a class="btn btn-default" href="{% url 'product_publish' pk=product.pk %}">Publish</a>
+    {% endif %}
+    <div class="container">
+    <div class="row product-row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 product- myfont">  <p class="productcontent">{{ product.text|safe|linebreaksbr}}
+    </p></div>
+        <div class="col-sm-2"></div>
+    </div>
+    </div>
+
+   <div class="container">
+    <div class="row">
+        <div class="col-xs-6 col-sm-4">
+             <p><img src="{{ product.image.url }}" alt="Image" style="width: auto" >
+    </p>
+        </div>
+        <div class="col-xs-6 col-sm-8 myfont" style="background-color: beige">
+            <p class="productingredients">{{ product.ingredients|safe|linebreaksbr}}
+    </p>
+        </div>
+    </div>
+</div>
+
+    {% if user.is_authenticated %}
+
+        <a class="btn btn-primary" href="{% url 'product_edit' pk=product.pk %}">
+            <span class="glyphicon glyphicon-pencil">edit</span>
+        </a>
+        <a class="btn btn-primary" href="{% url 'product_delete' pk=product.pk %}">
+            <span class="glyphicon glyphicon-remove">delete</span>
+        </a>
+
+    {% endif %}
+
+
+
+
+{% endblock %}
